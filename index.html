@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Kanmani 🤍</title>
+    <style>
+        /* CSS Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            color: #4a4a4a;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Butterflies (Floating Up) */
+        .butterfly {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: fly linear infinite;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(105vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% {
+                transform: translateY(-10vh) translateX(80px) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        /* Falling Flowers (Coming from Above) */
+        .flower {
+            position: absolute;
+            font-size: 22px;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 2;
+            opacity: 0.85;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.95; }
+            90% { opacity: 0.95; }
+            100% {
+                transform: translateY(105vh) translateX(60px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing Pink Floating Text ("To my dear Kanmani🌷") */
+        .glowing-text {
+            position: absolute;
+            font-family: 'Georgia', cursive, serif;
+            font-style: italic;
+            color: #ff4081;
+            text-shadow: 0 0 10px rgba(255, 64, 129, 0.9), 0 0 20px rgba(255, 128, 171, 0.8);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 3;
+            animation: floatUpFade 5s ease-out forwards;
+        }
+
+        @keyframes floatUpFade {
+            0% {
+                transform: translateY(10vh) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.9;
+                transform: translateY(0vh) scale(1);
+            }
+            80% { opacity: 0.9; }
+            100% {
+                transform: translateY(-30vh) scale(1.05);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 25px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
+            border: 2px solid #f8bbd0;
+        }
+
+        /* Photo Styling */
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .photo {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.2);
+        }
+
+        /* Pulsing Heart Animation */
+        .heart {
+            font-size: 26px;
+            color: #e91e63;
+            animation: pulse 1.5s infinite;
+            margin-bottom: 5px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #d81b60;
+            margin-bottom: 6px;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 1.4;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        /* Live Counter Box Styling */
+        .counter-box {
+            background: #fce4ec;
+            border: 2px solid #f48fb1;
+            border-radius: 16px;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(233, 30, 99, 0.1);
+        }
+
+        .counter-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #c2185b;
+            margin-bottom: 6px;
+        }
+
+        .counter-timer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d81b60;
+        }
+
+        .timer-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* Pink Styled Spotify Player Styling */
+        .music-player {
+            margin-bottom: 12px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid #f48fb1;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.15);
+            background-color: #fce4ec;
+        }
+
+        /* Reasons Generator Section */
+        .reasons-box {
+            background: #fff5f8;
+            border: 1px dashed #f48fb1;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+
+        .reason-text {
+            font-size: 13px;
+            color: #c2185b;
+            font-weight: 600;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            transition: opacity 0.3s;
+            padding: 0 5px;
+        }
+
+        .btn-secondary {
+            background-color: #f06292;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e91e63;
+            transform: translateY(-2px);
+        }
+
+        /* Compliment Generator Section */
+        .compliment-box {
+            background: #fdf2f7;
+            border: 1px dashed #ec407a;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+
+        .compliment-text {
+            font-size: 13px;
+            color: #ad1457;
+            font-weight: 600;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            transition: opacity 0.3s;
+            padding: 0 5px;
+        }
+
+        /* Open When Letters Section */
+        .letters-box {
+            background: #fdf2f7;
+            border: 1px solid #f8bbd0;
+            border-radius: 14px;
+            padding: 12px 10px;
+            margin-bottom: 12px;
+        }
+
+        .letters-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #d81b60;
+            margin-bottom: 8px;
+        }
+
+        .letter-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .btn-letter {
+            background: #ffffff;
+            color: #ad1457;
+            border: 1px solid #f48fb1;
+            padding: 8px 12px;
+            font-size: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-letter:hover {
+            background: #fce4ec;
+            transform: translateX(3px);
+        }
+
+        /* Virtual Scratch Card Section */
+        .scratch-box {
+            background: #fff0f5;
+            border: 1px solid #f8bbd0;
+            border-radius: 14px;
+            padding: 12px 10px;
+            margin-bottom: 12px;
+        }
+
+        .scratch-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #d81b60;
+            margin-bottom: 8px;
+        }
+
+        .scratch-container {
+            position: relative;
+            width: 100%;
+            height: 90px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(233, 30, 99, 0.15);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scratch-secret {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #c2185b;
+            text-align: center;
+            line-height: 1.4;
+            user-select: none;
+        }
+
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        /* Modal Overlay for Letters */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border: 2px solid #f48fb1;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 340px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.2);
+            animation: popIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 15px;
+            color: #d81b60;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .btn-close {
+            background-color: #ec407a;
+            color: white;
+            border: none;
+            padding: 6px 18px;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: #ec407a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 13px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-2px);
+        }
+
+        .btn-garden {
+            background-color: #8e24aa;
+            margin-top: 10px;
+        }
+
+        .btn-garden:hover {
+            background-color: #6a1b9a;
+        }
+
+        /* Hidden Message Style */
+        #secret-message {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #ad1457;
+            font-weight: 500;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            line-height: 1.4;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Click Heart Explosion Animation */
+        @keyframes popUp {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--end-x), var(--end-y)) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            animation: popUp 1s ease-out forwards;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Photo Section -->
+        <div class="photo-container">
+            <img src="love.png" alt="My Love" class="photo">
+        </div>
+
+        <div class="heart">❤️</div>
+        <h1>Hey Kanmani</h1>
+        <p>You are my absolute favorite notification. I will love u forever and I will always miss u. Run to me when u feel heavy or u need someone to talk to, I will always be waiting for u. I still remember when we first started talking. U will always be my sweet girl, Take care Kanmani ✨</p>
+        
+        <!-- Live Relationship Counter -->
+        <div class="counter-box">
+            <div class="counter-title">⏳ Talking since Oct 25, 2025:</div>
+            <div class="counter-timer">
+                <div class="timer-unit">
+                    <span id="days" class="timer-number">0</span>
+                    <span class="timer-label">Days</span>
+                </div>
+                <div class="timer-unit">
+                    <span id="hours" class="timer-number">0</span>
+                    <span class="timer-label">Hours</span>
+                </div>
+                <div class="timer-unit">
+                    <span id="minutes" class="timer-number">0</span>
+                    <span class="timer-label">Mins</span>
+                </div>
+                <div class="timer-unit">
+                    <span id="seconds" class="timer-number">0</span>
+                    <span class="timer-label">Secs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pink Styled Spotify Player Widget -->
+        <div class="music-player">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/65dvxc4Kctq3JIJ2BkKKMj?utm_source=generator&theme=1" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <!-- Interactive Reasons Generator Box -->
+        <div class="reasons-box">
+            <div id="reason-display" class="reason-text">Click below to see why I love you! ✨</div>
+            <button class="btn-secondary" onclick="nextReason()">Why I love u 💕</button>
+        </div>
+
+        <!-- Compliment Generator Box -->
+        <div class="compliment-box">
+            <div id="compliment-display" class="compliment-text">Press when you need a sweet compliment 🌸</div>
+            <button class="btn-secondary" onclick="nextCompliment()">Get a Compliment ✨</button>
+        </div>
+
+        <!-- Virtual Open When Letters -->
+        <div class="letters-box">
+            <div class="letters-title">💌 Open When Letters</div>
+            <div class="letter-buttons">
+                <button class="btn-letter" onclick="openLetter(1)">💌 Open when you miss me</button>
+                <button class="btn-letter" onclick="openLetter(2)">🌸 Open when you feel low</button>
+                <button class="btn-letter" onclick="openLetter(3)">✨ Open when you want to feel loved</button>
+            </div>
+        </div>
+
+        <!-- Virtual Scratch Card -->
+        <div class="scratch-box">
+            <div class="scratch-title">✨ Scratch off for a surprise! ✨</div>
+            <div class="scratch-container">
+                <div class="scratch-secret">
+                    🎁 "I WILL ALWAYS LOVE U KANMANI 💕"
+                </div>
+                <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Secret Message Button -->
+        <button class="btn" onclick="revealMessage()">Click for a secret</button>
+        
+        <div id="secret-message">
+            I will always love u and ur not hard to love or anything. Ur the sweetest thing that ever happened to me. I'll always be happy 💕
+        </div>
+
+        <!-- NEW: Page 2 Garden Button -->
+        <a href="page2.html" style="text-decoration: none;">
+            <button class="btn btn-garden">
+                Visit My Garden For You 🌷➔
+            </button>
+        </a>
+    </div>
+
+    <!-- Modal Popup for Letters -->
+    <div id="letter-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div id="modal-header" class="modal-title"></div>
+            <div id="modal-body" class="modal-body"></div>
+            <button class="btn-close" onclick="closeLetter()">Close with a Hug 🤗</button>
+        </div>
+    </div>
+
+    <script>
+        // Live Counter Logic (Starts from Oct 25, 2025)
+        const startDate = new Date("October 25, 2025 00:00:00").getTime();
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // Your custom 10 reasons
+        const reasons = [
+            "Your eyes is enough love ✨",
+            "Ur pretty smile 💖",
+            "The way u take care of me 🥰",
+            "The way u listen to my bak bak 🤭",
+            "Ur pretty face 🌸",
+            "Because u were there when no one else was 🤍",
+            "Because ur my kanmani ✨",
+            "Ur good hearted 🌷",
+            "The way u explains everything to me 💫",
+            "Ur comforting for me 🫶"
+        ];
+
+        let reasonIndex = 0;
+
+        function nextReason() {
+            const display = document.getElementById("reason-display");
+            display.style.opacity = "0";
+            
+            setTimeout(() => {
+                display.innerText = reasons[reasonIndex];
+                display.style.opacity = "1";
+                reasonIndex = (reasonIndex + 1) % reasons.length;
+            }, 200);
+
+            createHearts(5);
+        }
+
+        // Compliment Generator Data
+        const compliments = [
+            "You have the most gorgeous smile in the entire world! 💖",
+            "Everything is instantly better just by having you around. ✨",
+            "You are the prettiest girl, inside and out. 🌷",
+            "Your kindness and big heart make me fall for you more every day. 🤍",
+            "You make even ordinary days feel so special and magical. 🌟",
+            "Talking to you is my absolute favorite part of every single day. 🥰",
+            "You are so strong, brilliant, and deeply loved, Kanmani! 🫶"
+        ];
+
+        let complimentIndex = 0;
+
+        function nextCompliment() {
+            const display = document.getElementById("compliment-display");
+            display.style.opacity = "0";
+            
+            setTimeout(() => {
+                display.innerText = compliments[complimentIndex];
+                display.style.opacity = "1";
+                complimentIndex = (complimentIndex + 1) % compliments.length;
+            }, 200);
+
+            createHearts(5);
+        }
+
+        // Open When Letters Data
+        const letterContents = {
+            1: {
+                title: "💌 Open when you miss me",
+                text: "Hey Kanmani! If you're missing me right now, just close your eyes and remember how much I adore you. No matter the distance, you're always in my thoughts and right here in my heart. Call or text me whenever you want—I'm always waiting for you! 🤍"
+            },
+            2: {
+                title: "🌸 Open when you feel low",
+                text: "My prettiest girl, take a deep breath. You are so strong, so sweet, and so incredibly special. Whatever is stressing you out will pass, and I am always right by your side to support you and listen to anything you want to say. Smile, Kanmani! 💕"
+            },
+            3: {
+                title: "✨ Open when you want to feel loved",
+                text: "Never forget how precious you are to me. Your smile, your eyes, and your kind heart mean the world to me. Thank you for making my life so beautiful just by being in it. I love you forever and always! ✨"
+            }
+        };
+
+        function openLetter(id) {
+            document.getElementById("modal-header").innerText = letterContents[id].title;
+            document.getElementById("modal-body").innerText = letterContents[id].text;
+            document.getElementById("letter-modal").style.display = "flex";
+            createHearts(12);
+        }
+
+        function closeLetter() {
+            document.getElementById("letter-modal").style.display = "none";
+        }
+
+        // Scratch Card Logic
+        const canvas = document.getElementById("scratch-canvas");
+        const ctx = canvas.getContext("2d");
+        let isDrawing = false;
+        let triggeredCelebration = false;
+
+        function initScratchCard() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            ctx.fillStyle = "#ec407a";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "bold 13px 'Segoe UI', sans-serif";
+            ctx.fillStyle = "#ffffff";
+            ctx.textAlign = "center";
+            ctx.fillText("🌷 Scratch Me 🌷", canvas.width / 2, canvas.height / 2 + 5);
+        }
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function scratch(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, 18, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (!triggeredCelebration) {
+                triggeredCelebration = true;
+                createHearts(15);
+            }
+        }
+
+        canvas.addEventListener("mousedown", (e) => { isDrawing = true; scratch(e); });
+        canvas.addEventListener("mousemove", scratch);
+        window.addEventListener("mouseup", () => { isDrawing = false; });
+
+        canvas.addEventListener("touchstart", (e) => { isDrawing = true; scratch(e); });
+        canvas.addEventListener("touchmove", scratch);
+        window.addEventListener("touchend", () => { isDrawing = false; });
+
+        window.addEventListener("load", initScratchCard);
+
+        // High frequency background butterflies floating up
+        function spawnButterfly() {
+            const butterfly = document.createElement('div');
+            butterfly.className = 'butterfly';
+            butterfly.innerHTML = '🦋';
+            butterfly.style.left = Math.random() * window.innerWidth + 'px';
+            
+            const duration = Math.random() * 4 + 4;
+            butterfly.style.animationDuration = duration + 's';
+            
+            const size = Math.random() * 14 + 18;
+            butterfly.style.fontSize = size + 'px';
+            
+            document.body.appendChild(butterfly);
+            setTimeout(() => { butterfly.remove(); }, duration * 1000);
+        }
+        setInterval(spawnButterfly, 350);
+
+        // High frequency flowers falling from above
+        function spawnFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            const flowerEmojis = ['🌸', '🌺', '🌼', '🌷', '💐'];
+            flower.innerHTML = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+            flower.style.left = Math.random() * window.innerWidth + 'px';
+            
+            const duration = Math.random() * 4 + 3.5;
+            flower.style.animationDuration = duration + 's';
+            
+            const size = Math.random() * 12 + 16;
+            flower.style.fontSize = size + 'px';
+            
+            document.body.appendChild(flower);
+            setTimeout(() => { flower.remove(); }, duration * 1000);
+        }
+        setInterval(spawnFlower, 300);
+
+        // High frequency glowing text ("To my dear Kanmani🌷")
+        function spawnGlowingText() {
+            const textEl = document.createElement('div');
+            textEl.className = 'glowing-text';
+            textEl.innerHTML = 'To my dear Kanmani🌷';
+            
+            textEl.style.left = (Math.random() * 75 + 2) + 'vw';
+            textEl.style.top = (Math.random() * 70 + 10) + 'vh';
+            
+            const fontSize = Math.random() * 8 + 16;
+            textEl.style.fontSize = fontSize + 'px';
+            
+            document.body.appendChild(textEl);
+            setTimeout(() => { textEl.remove(); }, 5000);
+        }
+        setInterval(spawnGlowingText, 800);
+
+        // Button click & heart explosion
+        function revealMessage() {
+            var msg = document.getElementById("secret-message");
+            if (msg.style.display === "block") {
+                msg.style.display = "none";
+            } else {
+                msg.style.display = "block";
+                createHearts(25);
+            }
+        }
+
+        function createHearts(count = 25) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                
+                const startX = window.innerWidth / 2 + (Math.random() - 0.5) * 100;
+                const startY = window.innerHeight / 2 + (Math.random() - 0.5) * 50;
+                
+                heart.style.left = startX + 'px';
+                heart.style.top = startY + 'px';
+                
+                const endX = (Math.random() - 0.5) * 350;
+                const endY = -Math.random() * 300 - 100;
+                
+                heart.style.setProperty('--end-x', endX + 'px');
+                heart.style.setProperty('--end-y', endY + 'px');
+                
+                document.body.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>
