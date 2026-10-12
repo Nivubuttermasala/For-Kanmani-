@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Kanmani 🌷</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background-color: #0b0d10;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: #ffffff;
+        }
+
+        /* Container for blooming stem elements */
+        .garden {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Flower Stem */
+        .stem-container {
+            position: absolute;
+            bottom: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+            animation: growUp 3.5s ease-out forwards;
+        }
+
+        .stem {
+            width: 3px;
+            background: linear-gradient(to top, #1b4332, #52b788);
+            border-radius: 3px;
+        }
+
+        .flower-head {
+            font-size: 28px;
+            transform: scale(0);
+            animation: bloom 1s ease-out forwards;
+            animation-delay: 2.8s;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+        }
+
+        @keyframes growUp {
+            0% {
+                height: 0vh;
+                opacity: 0;
+            }
+            100% {
+                height: var(--stem-height);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(0) rotate(-20deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Center Poetic Card */
+        .message-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 30px 25px;
+            background: rgba(11, 13, 16, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            max-width: 380px;
+            width: 90%;
+            opacity: 0;
+            animation: fadeInText 2s ease-in forwards;
+            animation-delay: 3s;
+        }
+
+        .subtitle {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d81b60;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: normal;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #f8bbd0;
+            text-shadow: 0 0 10px rgba(248, 187, 208, 0.3);
+        }
+
+        .poem {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: transparent;
+            color: #f48fb1;
+            border: 1px solid #f48fb1;
+            padding: 8px 18px;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: #f48fb1;
+            color: #0b0d10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="garden" id="garden"></div>
+
+    <div class="message-box">
+        <div class="subtitle">FOREVER & ALWAYS</div>
+        <div class="title">My Love</div>
+        <div class="poem">
+            I planted roses and sunflowers for you.<br>
+            Not one of them will ever wilt.<br>
+            Neither will how I feel about you, Kanmani. 🤍
+        </div>
+        <a href="index.html" class="back-btn">⬅ Back to Main Page</a>
+    </div>
+
+    <script>
+        const flowerEmojis = ['🌸', '🌻', '🌷', '🌺', '🌼', '🌹'];
+        const garden = document.getElementById('garden');
+
+        // Dynamically grow flowers across the bottom screen
+        const flowerCount = window.innerWidth < 500 ? 35 : 60;
+
+        for (let i = 0; i < flowerCount; i++) {
+            const stemContainer = document.createElement('div');
+            stemContainer.className = 'stem-container';
+
+            // Random positioning & heights
+            const leftPos = (i / flowerCount) * 100 + (Math.random() * 2 - 1);
+            const stemHeight = Math.random() * 35 + 25; // Height between 25vh and 60vh
+            const delay = Math.random() * 1.5;
+
+            stemContainer.style.left = leftPos + 'vw';
+            stemContainer.style.setProperty('--stem-height', stemHeight + 'vh');
+            stemContainer.style.animationDelay = delay + 's';
+
+            // Stem element
+            const stem = document.createElement('div');
+            stem.className = 'stem';
+            stem.style.height = '100%';
+
+            // Flower Head element
+            const flowerHead = document.createElement('div');
+            flowerHead.className = 'flower-head';
+            flowerHead.innerText = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+            flowerHead.style.animationDelay = (delay + 2.2) + 's';
+
+            stemContainer.appendChild(flowerHead);
+            stemContainer.appendChild(stem);
+            garden.appendChild(stemContainer);
+        }
+    </script>
+
+</body>
+</html>
